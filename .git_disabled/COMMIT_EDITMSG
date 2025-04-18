@@ -1,0 +1,10 @@
+feat: Add project registration, editing, and search components
+
+- Implemented ProjectEdit component for editing existing projects.
+- Created ProjectRegistration component for new project registration.
+- Developed ProjectSearch component for searching projects with various filters.
+- Added TopPage component for navigation to project registration and search.
+- Integrated ConfirmationModal for user confirmation on project updates and registrations.
+- Established basic styling with Tailwind CSS and created custom styles in index.css.
+- Configured TypeScript settings and Vite for the project.
+- Added dummy data for testing project search functionality.
