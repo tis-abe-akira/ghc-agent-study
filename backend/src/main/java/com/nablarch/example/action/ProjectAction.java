@@ -108,4 +108,27 @@ public class ProjectAction {
         return new HttpResponse(HttpResponse.Status.NO_CONTENT.getStatusCode());
     }
 
+    /**
+     * プロジェクトIDを指定して単一のプロジェクト情報を取得する。
+     *
+     * @param req HTTPリクエスト
+     * @return プロジェクト情報
+     * @see https://nablarch.github.io/docs/LATEST/doc/application_framework/application_framework/web_service/rest/feature_details/resource_signature.html
+     */
+    @GET
+    @Path("{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    // public ProjectResponseDto findById(@PathParam("id") Integer id) {
+    public ProjectResponseDto findById(JaxRsHttpRequest req) {
+        Integer projectId = Integer.valueOf(req.getPathParam("id"));
+        System.out.println("projectId = " + projectId);
+        // プロジェクト情報を取得
+        Project project = UniversalDao.findById(Project.class, projectId);
+        if (project == null) {
+            // 404 Not Foundを返す（Nablarch標準の例外で対応）
+            throw new nablarch.fw.web.HttpErrorResponse(HttpResponse.Status.NOT_FOUND.getStatusCode());
+        }
+        return BeanUtil.createAndCopy(ProjectResponseDto.class, project);
+    }
+
 }
