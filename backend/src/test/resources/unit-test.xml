@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component-configuration
+    xmlns="http://tis.co.jp/nablarch/component-configuration"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://tis.co.jp/nablarch/component-configuration https://nablarch.github.io/schema/component-configuration.xsd">
+
+  <!-- プロダクションのコンポーネント設定を読み込む -->
+  <import file="rest-component-configuration.xml"/>
+
+  <!-- テスティングフレームワークの設定 -->
+  <import file="nablarch/test/test-data.xml"/>
+  <import file="nablarch/test/test-transaction.xml"/>
+  <import file="nablarch/test/rest-request-test.xml"/>
+  <import file="nablarch/core/date_test.xml"/>
+
+  <!-- DBの接続設定を定義する -->
+  <component name="dbInfo" class="nablarch.test.core.db.GenericJdbcDbInfo">
+    <property name="dataSource" ref="dataSource"/>
+    <property name="schema" value="PUBLIC"/>
+  </component>
+
+  <!-- テスト用HttpServerにJetty12を定義する -->
+  <component name="httpServerFactory" class="nablarch.fw.web.httpserver.HttpServerFactoryJetty12"/>
+
+  <!-- エンティティテスト設定 -->
+  <component name="entityTestConfiguration" class="nablarch.test.core.entity.EntityTestConfiguration">
+    <property name="maxMessageId" value="{nablarch.core.validation.ee.Length.max.message}"/>
+    <property name="maxAndMinMessageId" value="{nablarch.core.validation.ee.Length.min.max.message}"/>
+    <property name="fixLengthMessageId" value="{nablarch.core.validation.ee.Length.fixed.message}"/>
+    <property name="underLimitMessageId" value="{nablarch.core.validation.ee.Length.min.max.message}"/>
+    <property name="minMessageId" value="{nablarch.core.validation.ee.Length.min.message}"/>
+    <property name="emptyInputMessageId" value="{nablarch.core.validation.ee.Required.message}"/>
+    <property name="characterGenerator">
+      <component name="characterGenerator"
+                 class="nablarch.test.core.util.generator.BasicJapaneseCharacterGenerator"/>
+    </property>
+    <property name="validationTestStrategy">
+      <component class="nablarch.test.core.entity.BeanValidationTestStrategy"/>
+    </property>
+  </component>
+</component-configuration>
