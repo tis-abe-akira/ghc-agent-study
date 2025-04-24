@@ -14,7 +14,50 @@
 
 ## frontendのアーキテクチャ概要
 
+本プロジェクトのfrontendは、React（TypeScript）+ Vite + TailwindCSSを用いて構築されています。  
+画面ごとにコンポーネントを分割し、シンプルかつ拡張性の高いSPA（Single Page Application）構成となっています。
 
+### 主な構成要素
+
+- **ルーティング**  
+  `react-router-dom`を利用し、`App.tsx`で画面遷移を制御しています。  
+  主要な画面は以下の通りです。
+  - トップページ（`TopPage.tsx`）
+  - プロジェクト登録（`ProjectRegistration.tsx`）
+  - プロジェクト検索（`ProjectSearch.tsx`）
+  - プロジェクト詳細（`ProjectDetail.tsx`）
+  - プロジェクト編集（`ProjectEdit.tsx`）
+
+- **UI設計**  
+  TailwindCSSによるユーティリティファーストなスタイリングを採用し、`index.css`で共通のカスタムクラスも定義しています。
+
+- **コンポーネント設計**  
+  `/src/components/`配下に各画面・共通部品（例：`ConfirmationModal.tsx`）を配置し、再利用性を高めています。
+
+- **状態管理**  
+  画面単位で`useState`等のReact標準フックを利用し、シンプルな状態管理を実現しています。
+
+- **ダミーデータ**  
+  現時点ではAPI連携は未実装であり、プロジェクト一覧や詳細などはダミーデータで表示しています。
+
+- **開発支援**  
+  ESLint・TypeScriptによる静的解析、Viteによる高速な開発体験を提供しています。
+
+### フォルダ構成例
+
+- `src/components/` ... 画面・共通コンポーネント
+- `src/assets/` ... 画像等の静的アセット
+- `index.html` ... エントリポイント
+- `tailwind.config.js`, `postcss.config.js` ... スタイル設定
+- `vite.config.ts` ... Vite設定
+
+### 今後の拡張
+
+- バックエンドAPIとの連携実装
+- 状態管理の高度化（必要に応じてContextや外部ライブラリ導入）
+- テストコードの追加
+
+このような構成により、保守性・拡張性・開発効率の高いフロントエンドを実現しています。
 
 
 ## backendのアーキテクチャ概要
