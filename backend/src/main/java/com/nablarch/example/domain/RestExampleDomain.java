@@ -57,4 +57,14 @@ public class RestExampleDomain {
     @Digits(integer = 9)
     private String version;
 
+    /** 業種コード */
+    @NumberRange(min = 0)
+    @Digits(integer = 2)
+    private String industryCode;
+    
+    /** 業種名 */
+    @Length(max = 50)
+    @SystemChar(charsetDef = "全角文字")
+    private String industryName;
+
 }

@@ -1,7 +1,9 @@
 package com.nablarch.example.service;
 
 import com.nablarch.example.dto.IndustryDto;
+import com.nablarch.example.dto.IndustrySearchDto;
 import com.nablarch.example.entity.Industry;
+
 import nablarch.common.dao.UniversalDao;
 
 import java.util.List;
@@ -16,8 +18,8 @@ public class IndustryService {
      * 全業種を取得する。
      * @return 業種一覧
      */
-    public List<IndustryDto> findAll() {
-        List<Industry> industries = UniversalDao.findAll(Industry.class);
+    public List<IndustryDto> findAll(IndustrySearchDto searchCondition) {
+        List<Industry> industries = UniversalDao.findAllBySqlFile(Industry.class, "FIND_INDUSTRY", searchCondition);
         
         // エンティティをDTOに変換
         return industries.stream()
